@@ -5,6 +5,8 @@
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
+# Note: This package is still under development and not yet ready for production use.
+
 ## Support us
 
 ## Installation
@@ -15,30 +17,10 @@ You can install the package via composer:
 composer require mgcodeur/laravel-comment
 ```
 
-You can publish and run the migrations with:
+Install the package by running the following command:
 
 ```bash
-php artisan vendor:publish --tag="laravel-comment-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-comment-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-comment-views"
+php artisan laravel-comment:install
 ```
 
 ## Usage
