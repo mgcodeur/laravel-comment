@@ -8,7 +8,7 @@ use Mgcodeur\LaravelComment\Traits\HasComment;
 
 final class ForAnalysis extends Model
 {
-    use HasComment, Commentable {
+    use Commentable, HasComment {
         Commentable::comments insteadof HasComment;
         HasComment::comments as hasCommentRelation;
     }
