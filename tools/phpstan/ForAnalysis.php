@@ -10,6 +10,8 @@ final class ForAnalysis extends Model
 {
     use Commentable, HasComment {
         Commentable::comments insteadof HasComment;
-        HasComment::comments as hasCommentRelation;
+        Commentable::replies insteadof HasComment;
+        HasComment::comments as hasCommentComments;
+        HasComment::replies as hasCommentReplies;
     }
 }
