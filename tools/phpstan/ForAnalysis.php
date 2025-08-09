@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Mgcodeur\LaravelComment\Traits\Commentable;
 use Mgcodeur\LaravelComment\Traits\HasComment;
 
-class ForAnalysis extends Model
+final class ForAnalysis extends Model
 {
-    use Commentable;
-    use HasComment;
+    use HasComment, Commentable {
+        Commentable::comments insteadof HasComment;
+        HasComment::comments as hasCommentRelation;
+    }
 }
