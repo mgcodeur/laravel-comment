@@ -36,7 +36,8 @@
     "autoload": {
         "psr-4": {
             "Mgcodeur\\LaravelComment\\": "src/",
-            "Mgcodeur\\LaravelComment\\Database\\Factories\\": "database/factories/"
+            "Mgcodeur\\LaravelComment\\Database\\Factories\\": "database/factories/",
+            "Mgcodeur\\LaravelComment\\Tools\\": "tools/"
         }
     },
     "autoload-dev": {

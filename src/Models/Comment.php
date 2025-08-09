@@ -3,20 +3,27 @@
 namespace Mgcodeur\LaravelComment\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property int $id
- * @property int $user_id
- * @property int $commentable_id
- * @property string $commentable_type
- * @property string $commenter_type
- * @property int $commenter_id
- * @property int $parent_id
+ * @property int|null $user_id
+ * @property int|null $commentable_id
+ * @property string|null $commentable_type
+ * @property string|null $commenter_type
+ * @property int|null $commenter_id
+ * @property int|null $parent_id
  * @property string $content
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int,self> $replies
+ * @property-read int|null $replies_count
  *
  * @method MorphTo commentable()
  * @method MorphTo commenter()
+ * @method HasMany replies()
+ *
+ * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Comment extends Model
 {
@@ -27,7 +34,6 @@ class Comment extends Model
         'commenter_type',
         'commenter_id',
         'parent_id',
-        'user_id',
         'content',
     ];
 
@@ -41,8 +47,8 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    public function replies()
+    public function replies(): HasMany
     {
-        return $this->hasMany(Comment::class, 'parent_id')->with('replies');
+        return $this->hasMany(self::class, 'parent_id')->with('replies');
     }
 }
