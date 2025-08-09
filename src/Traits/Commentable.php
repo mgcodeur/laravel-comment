@@ -25,9 +25,6 @@ trait Commentable
         return $this->morphMany(config('comment.models.comment'), 'commentable');
     }
 
-    /**
-     * @return Comment
-     */
     public function comment(string $comment, ?Model $commenter = null): Comment
     {
         $commenter ??= Auth::user();
@@ -41,10 +38,9 @@ trait Commentable
 
         /** @var Comment $newComment */
         $newComment = $commentsRelation->create([
-            'user_id'        => $commenter->getKey(),
             'commenter_type' => $commenter->getMorphClass(),
-            'commenter_id'   => $commenter->getKey(),
-            'content'        => $comment,
+            'commenter_id' => $commenter->getKey(),
+            'content' => $comment,
         ]);
 
         return $newComment;
