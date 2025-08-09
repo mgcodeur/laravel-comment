@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "mgcodeur/laravel-comment",
+    "description": "This is my package laravel-comment",
     "keywords": [
-        ":vendor_name",
+        "mgcodeur",
         "laravel",
-        ":package_slug"
+        "laravel-comment"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/mgcodeur/laravel-comment",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "mgcodeur",
+            "email": "mgcodeur@gmail.com",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Mgcodeur\\LaravelComment\\": "src/",
+            "Mgcodeur\\LaravelComment\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Mgcodeur\\LaravelComment\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Mgcodeur\\LaravelComment\\LaravelCommentServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelComment": "Mgcodeur\\LaravelComment\\Facades\\LaravelComment"
             }
         }
     },

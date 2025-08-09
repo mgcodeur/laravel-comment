@@ -1,10 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Mgcodeur\LaravelComment\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Mgcodeur\LaravelComment\LaravelCommentServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,20 +15,56 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Mgcodeur\\LaravelComment\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
+
+        if (! Schema::hasTable('users')) {
+            Schema::create('users', function (Blueprint $table) {
+                $table->id();
+                $table->string('name')->nullable();
+                $table->string('email')->nullable();
+                $table->string('password')->nullable();
+                $table->timestamps();
+            });
+        }
+
+        if (! Schema::hasTable('posts')) {
+            Schema::create('posts', function (Blueprint $table) {
+                $table->id();
+                $table->string('title')->nullable();
+                $table->text('content')->nullable();
+                $table->timestamps();
+            });
+        }
+
+        if (! Schema::hasTable('comments')) {
+            Schema::create('comments', function (Blueprint $table) {
+                $table->id();
+                $table->text('content');
+                $table->morphs('commentable');
+                $table->nullableMorphs('commenter');
+                $table->timestamps();
+            });
+        }
+
+        config()->set('comment.models.comment', \Mgcodeur\LaravelComment\Models\Comment::class);
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            LaravelCommentServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
         config()->set('database.default', 'testing');
+        config()->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
 
         /*
          foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/database/migrations') as $migration) {
