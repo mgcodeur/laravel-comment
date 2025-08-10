@@ -36,6 +36,14 @@ class Comment extends Model
         'content',
     ];
 
+    protected $hidden = [
+        'commentable_type',
+        'commentable_id',
+        'commenter_type',
+        'commenter_id',
+        'parent_id',
+    ];
+
     public function commentable(): MorphTo
     {
         return $this->morphTo();
@@ -48,6 +56,7 @@ class Comment extends Model
 
     public function replies(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id')->with('replies');
+        return $this->hasMany(self::class, 'parent_id')
+            ->with('replies');
     }
 }

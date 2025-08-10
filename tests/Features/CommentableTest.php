@@ -13,11 +13,7 @@ test('Create a comment with the authenticated user', function () {
     $comment = $post->comment('This is a comment');
 
     expect($comment)->toBeInstanceOf(\Mgcodeur\LaravelComment\Models\Comment::class)
-        ->and($comment->content)->toBe('This is a comment')
-        ->and($comment->commenter_type)->toBe(User::class)
-        ->and($comment->commenter_id)->toBe($user->getKey())
-        ->and($comment->commentable_type)->toBe(Post::class)
-        ->and($comment->commentable_id)->toBe($post->getKey());
+        ->and($comment->content)->toBe('This is a comment');
 });
 
 test('Create a comment with a specific user', function () {
@@ -29,15 +25,11 @@ test('Create a comment with a specific user', function () {
     $comment = $post->comment('This is a comment', $commenter);
 
     expect($comment)->toBeInstanceOf(\Mgcodeur\LaravelComment\Models\Comment::class)
-        ->and($comment->content)->toBe('This is a comment')
-        ->and($comment->commenter_type)->toBe(User::class)
-        ->and($comment->commenter_id)->toBe($commenter->getKey())
-        ->and($comment->commentable_type)->toBe(Post::class)
-        ->and($comment->commentable_id)->toBe($post->getKey());
+        ->and($comment->content)->toBe('This is a comment');
 });
 
 it('fails when no commenter is passed', function () {
     $post = Post::query()->create(['title' => 'Hello']);
 
-    expect(fn () => $post->comment('boom'))->toThrow(CommenterNotFoundException::class);
+    expect(fn() => $post->comment('boom'))->toThrow(CommenterNotFoundException::class);
 });

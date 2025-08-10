@@ -14,17 +14,6 @@ use Mgcodeur\LaravelComment\Models\Comment;
  */
 trait Commentable
 {
-    public function comments(): MorphMany
-    {
-        return $this->morphMany(config('comment.models.comment'), 'commentable')
-            ->with('replies');
-    }
-
-    private function replies(): MorphMany
-    {
-        return $this->morphMany(config('comment.models.comment'), 'commentable');
-    }
-
     public function comment(string $comment, ?Model $commenter = null): Comment
     {
         $commenter ??= Auth::user();
@@ -44,5 +33,18 @@ trait Commentable
         ]);
 
         return $newComment;
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(config('comment.models.comment'), 'commentable')
+            ->whereNull('parent_id')
+            ->with('replies');
+    }
+
+    private function replies(): MorphMany
+    {
+        return $this->morphMany(config('comment.models.comment'), 'commentable')
+            ->whereNotNull('parent_id');
     }
 }
