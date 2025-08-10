@@ -31,5 +31,5 @@ test('Create a comment with a specific user', function () {
 it('fails when no commenter is passed', function () {
     $post = Post::query()->create(['title' => 'Hello']);
 
-    expect(fn() => $post->comment('boom'))->toThrow(CommenterNotFoundException::class);
+    expect(fn () => $post->comment('boom'))->toThrow(CommenterNotFoundException::class);
 });
