@@ -9,11 +9,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 /**
  * @property int $id
  * @property int|null $user_id
- * @property int|null $commentable_id
- * @property string|null $commentable_type
- * @property string|null $commenter_type
- * @property int|null $commenter_id
- * @property int|null $parent_id
  * @property string $content
  * @property-read \Illuminate\Database\Eloquent\Collection<int,self> $replies
  * @property-read int|null $replies_count
